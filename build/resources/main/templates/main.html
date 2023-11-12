@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+	<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
@@ -14,7 +14,40 @@
             border: red 3px solid;
             position: fixed;
             z-index: 2;
-        }	
+        }
+		.toon-item {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			width: 150px; /* 이미지 너비 */
+			text-align: center;
+			margin: 10px; /* 이미지 간격 조절 */
+		}
+
+		.toon-item img {
+			width: 100%;
+			height: auto;
+		}
+
+		.likes {
+			font-weight: bold;
+		}
+
+
+
+		/* 좋아요(즐겨찾기) 버튼 스타일 */
+		.favorite-button {
+			background-color: #007bff;
+			color: #fff;
+			border: none;
+			padding: 5px 10px;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+
+		.favorited {
+			background-color: #ff0000; /* 즐겨찾기가 활성화된 경우의 스타일 */
+		}
 	</style>
 </head>
 <body>
@@ -41,6 +74,10 @@
 		<div style="white-space: nowrap; width: 100%; overflow-x: auto;">
 			<div th:each="toon : ${toons}" style="display: inline-block;">
 				<img th:src="${toon.TOON_IMAGELINK}" th:attr="onclick='goToLink(\'' + ${toon.TOON_LINK} + '\');'" width="150px" height="200px">
+				<p th:text="${toon.TOON_NAME}"></p>
+				<div class=".toon-item">
+					<button class="favorite-button" onclick="toggleFavorite(this)">즐찾</button>
+					<p class="likes" th:text="${toon.TOON_LIKES}"></p>
 			</div>
 		</div>
 		<div>
